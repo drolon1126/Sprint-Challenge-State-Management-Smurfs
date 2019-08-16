@@ -9,6 +9,16 @@ export const ADD_SMURF_DATA_SUCCESS = 'ADD_SMURF_DATA_SUCCESS';
 export const ADD_SMURF_DATA_FAILURE = 'ADD_SMURF_DATA_FAILURE';
 
 export const UPDATE_FORM = 'UPDATE_FORM';
+export const EDIT_FORM = 'EDIT_FORM';
+export const EDIT_FORM_START = 'EDIT_FORM_START';
+
+export const DELETE_SMURF_DATA_START = 'DELETE_SMURF_DATA_START';
+export const DELETE_SMURF_DATA_SUCCESS = 'DELETE_SMURF_DATA_SUCCESS';
+export const DELETE_SMURF_DATA_FAILURE = 'DELETE_SMURF_DATA_FAILURE';
+
+export const EDIT_SMURF_DATA_START = 'EDIT_SMURF_DATA_START';
+export const EDIT_SMURF_DATA_SUCCESS = 'EDIT_SMURF_DATA_SUCCESS';
+export const EDIT_SMURF_DATA_FAILURE = 'EDIT_SMURF_DATA_FAILURE';
 
 
 
@@ -48,4 +58,47 @@ export const formUpdate = (key,value) => {
     type: UPDATE_FORM,
     payload: {key:key,value:value}
   }
+}
+
+export const formEdit = (key,value) => {
+  return {
+    type: EDIT_FORM,
+    payload: {key:key,value:value}
+  }
+}
+
+export const formEditStart = () => {
+  return {
+    type: EDIT_FORM_START
+  }
+}
+
+export const deleteSmurf = (id) => {
+  return dispatch => {
+    dispatch({ type: DELETE_SMURF_DATA_START });
+    axios
+      .delete(`http://localhost:3333/smurfs/${id}`)
+      .then(res => {
+        console.log(res);
+        dispatch({ type: DELETE_SMURF_DATA_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: DELETE_SMURF_DATA_FAILURE, payload: err.response });
+      });
+  };
+}
+
+export const editSmurf = (id, smurfData) => {
+  return dispatch => {
+    dispatch({ type: EDIT_SMURF_DATA_START });
+    axios
+      .put(`http://localhost:3333/smurfs/${id}`, smurfData)
+      .then(res => {
+        console.log(res);
+        dispatch({ type: EDIT_SMURF_DATA_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: EDIT_SMURF_DATA_FAILURE, payload: err.response });
+      });
+  };
 }
