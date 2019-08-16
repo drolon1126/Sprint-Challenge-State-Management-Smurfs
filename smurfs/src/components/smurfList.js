@@ -11,7 +11,8 @@ const SmurfList = () => {
 
   useEffect(()=>{
     dispatch(getSmurfs());
-  },[smurfs]);
+  },[])
+  
 
   return (
     <>

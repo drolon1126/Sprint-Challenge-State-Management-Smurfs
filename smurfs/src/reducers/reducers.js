@@ -1,9 +1,8 @@
-import { EDIT_FORM, EDIT_FORM_START, EDIT_SMURF_DATA_START, EDIT_SMURF_DATA_SUCCESS, EDIT_SMURF_DATA_FAILURE,DELETE_SMURF_DATA_START, DELETE_SMURF_DATA_SUCCESS, DELETE_SMURF_DATA_FAILURE, UPDATE_FORM, FETCH_SMURF_DATA_START, FETCH_SMURF_DATA_SUCCESS, FETCH_SMURF_DATA_FAILURE, ADD_SMURF_DATA_START, ADD_SMURF_DATA_SUCCESS, ADD_SMURF_DATA_FAILURE } from '../actions/actions';
+import { EDIT_FORM, EDIT_SMURF_DATA_START, EDIT_SMURF_DATA_SUCCESS, EDIT_SMURF_DATA_FAILURE,DELETE_SMURF_DATA_START, DELETE_SMURF_DATA_SUCCESS, DELETE_SMURF_DATA_FAILURE, UPDATE_FORM, FETCH_SMURF_DATA_START, FETCH_SMURF_DATA_SUCCESS, FETCH_SMURF_DATA_FAILURE, ADD_SMURF_DATA_START, ADD_SMURF_DATA_SUCCESS, ADD_SMURF_DATA_FAILURE } from '../actions/actions';
 
 
 const initialState = {
   isLoading: false,
-  isEditing: false,
   smurfs: [
     {
       name: "Brainey",
@@ -27,19 +26,14 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case EDIT_FORM_START:
-      return{
-        ...state,
-        isEditing: true
-      }
     case EDIT_FORM:
       return{
         ...state,
         editFormData: {
-          ...state.formData,
+          ...state.editFormData,
           [action.payload.key]:action.payload.value
         }
-      }
+      };
     case UPDATE_FORM:
       return{
         ...state,
@@ -47,7 +41,7 @@ const reducer = (state = initialState, action) => {
           ...state.formData,
           [action.payload.key]:action.payload.value
         }
-      }
+      };
     case FETCH_SMURF_DATA_START:
       return {
         ...state,
@@ -109,7 +103,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        isEditing:false,
         error: ''
       };
       case EDIT_SMURF_DATA_SUCCESS:

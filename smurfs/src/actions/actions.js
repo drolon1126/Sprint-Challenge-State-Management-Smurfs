@@ -10,7 +10,6 @@ export const ADD_SMURF_DATA_FAILURE = 'ADD_SMURF_DATA_FAILURE';
 
 export const UPDATE_FORM = 'UPDATE_FORM';
 export const EDIT_FORM = 'EDIT_FORM';
-export const EDIT_FORM_START = 'EDIT_FORM_START';
 
 export const DELETE_SMURF_DATA_START = 'DELETE_SMURF_DATA_START';
 export const DELETE_SMURF_DATA_SUCCESS = 'DELETE_SMURF_DATA_SUCCESS';
@@ -29,7 +28,7 @@ export const addSmurf = smurf =>{
     axios
       .post(`http://localhost:3333/smurfs`, smurf)
       .then(res => {
-        console.log(res);
+        console.log('hi',res);
         dispatch({ type: FETCH_SMURF_DATA_SUCCESS, payload: res.data });
       })
       .catch(err => {
@@ -44,7 +43,7 @@ export const getSmurfs = () => {
     axios
       .get(`http://localhost:3333/smurfs`)
       .then(res => {
-        console.log(res);
+        console.log('hi2',res);
         dispatch({ type: FETCH_SMURF_DATA_SUCCESS, payload: res.data });
       })
       .catch(err => {
@@ -67,19 +66,13 @@ export const formEdit = (key,value) => {
   }
 }
 
-export const formEditStart = () => {
-  return {
-    type: EDIT_FORM_START
-  }
-}
-
 export const deleteSmurf = (id) => {
   return dispatch => {
     dispatch({ type: DELETE_SMURF_DATA_START });
     axios
       .delete(`http://localhost:3333/smurfs/${id}`)
       .then(res => {
-        console.log(res);
+        console.log('hi3',res);
         dispatch({ type: DELETE_SMURF_DATA_SUCCESS, payload: res.data });
       })
       .catch(err => {
@@ -94,7 +87,7 @@ export const editSmurf = (id, smurfData) => {
     axios
       .put(`http://localhost:3333/smurfs/${id}`, smurfData)
       .then(res => {
-        console.log(res);
+        console.log('hi4',res);
         dispatch({ type: EDIT_SMURF_DATA_SUCCESS, payload: res.data });
       })
       .catch(err => {
